@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const { matchedData } = require('express-validator');
 const ash = require('express-async-handler');
 const {
   idParamValidator,
@@ -14,7 +13,7 @@ router.delete(
   ash(async (req, res) => {
     const { id } = req.params;
     await knex('emails').delete().where({ id });
-    res.status(204).json({ message: 'Email deletado com sucesso' });
+    res.status(200).json({ message: 'Email deletado com sucesso' });
   })
 );
 

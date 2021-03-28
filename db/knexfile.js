@@ -14,6 +14,9 @@ module.exports = {
         return isValidDate
           ? moment(fieldValue).format('YYYY-MM-DD HH:mm:ss')
           : null;
+      } else if (field.name === 'images') {
+        const fieldValue = field.string();
+        return JSON.parse(fieldValue);
       }
       return next();
     },

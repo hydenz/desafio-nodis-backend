@@ -9,8 +9,11 @@ const updateProduct = require('./controllers/products/updateProduct');
 const getEmail = require('./controllers/emails/getEmail');
 const addEmail = require('./controllers/emails/addEmail');
 const deleteEmail = require('./controllers/emails/deleteEmail');
+const updateEmail = require('./controllers/emails/updateEmail');
+const swaggerUi = require('swagger-ui-express');
+const swaggerFile = require('./swagger/swagger.json');
 
-const port = 3000;
+const port = 3001;
 
 const app = express();
 app.use(express.json());
@@ -22,6 +25,8 @@ app.use(updateProduct);
 app.use(addEmail);
 app.use(getEmail);
 app.use(deleteEmail);
+app.use(updateEmail);
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 app.use(errorHandler);
 
