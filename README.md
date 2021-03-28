@@ -19,4 +19,3 @@ a especificação OpenAPI 3.0.0 está disponível na rota [/docs](http://ec2-15-
 
 - Criar testes de integração com Jest
 - Desenvolver logs de requisições e erros com Morgan
-- Disponibilizar collection do Postman
