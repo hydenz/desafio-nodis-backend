@@ -25,7 +25,10 @@ router.patch(
     newProduct.updatedAt = knex.fn.now();
     await knex('products').update(newProduct).where({ id });
     const rows = await getRows('products', { id });
-    res.json({ message: 'Produto atualizado com sucesso', product: rows[0] });
+    res.json({
+      message: 'Produto atualizado com sucesso',
+      product: rows[0],
+    });
   })
 );
 

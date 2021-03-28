@@ -8,7 +8,6 @@ const dbParams = {
   IMAGES_MAX_LENGTH: 1024,
   PRICE_MAX_INTEGER: 2147483647,
   QUANTITY_MAX_INTEGER: 2147483647,
-  DATETIME_REGEXP: /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]$/,
   STATUS_REGEXP: /^(AVAILABLE|UNAVAILABLE)$/,
 };
 
@@ -42,13 +41,15 @@ const idParamValidator = (method) => {
         req.status = 404;
         return Promise.reject(`Produto de ID ${id} não encontrado`);
       }
-      req.product = rows[0];
+      const product = rows[0];
+      req.product = product;
     })
     .bail()
     .if(() => method === 'PATCH' || method === 'DELETE')
     .custom(
       async (id, { req }) =>
-        req.product.deletedAt && Promise.reject('Este produto já foi deletado')
+        req.product.deletedAt &&
+        Promise.reject(`O produto de ID ${req.product.id} já foi deletado`)
     );
 
   return [validator];
@@ -147,16 +148,6 @@ const bodyValidator = (method) => {
     )
       .optional()
       .custom((status) => dbParams.STATUS_REGEXP.test(status)),
-    body(
-      'createdAt',
-      "Deve ser do tipo String no formato tipo 'YYYY-MM-DD hh:mm:ss' e ser mais antigo que o tempo atual"
-    )
-      .optional()
-      .isString()
-      .bail()
-      .custom((value) => dbParams.DATETIME_REGEXP.test(value))
-      .bail()
-      .custom((value) => new Date(value) <= new Date()),
   ];
   return validations;
 };

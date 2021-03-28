@@ -1,0 +1,1128 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "desafio-nodis-backend",
+    "description": "Documentação do [Desafio Nodis Backend](https://github.com/nodis-com-br/backend-test)",
+    "contact": {
+      "name": "Marcelo",
+      "url": "https://github.com/hydenz/desafio-nodis-backend",
+      "email": "marcelof_lima@hotmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://ec2-15-228-34-22.sa-east-1.compute.amazonaws.com:3001"
+    },
+    {
+      "url": "http://localhost:3001"
+    }
+  ],
+  "paths": {
+    "/products": {
+      "post": {
+        "tags": ["products"],
+        "description": "Adiciona um produto novo, caso todas as validações passem",
+        "summary": "Adiciona um produto",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                ],
+                "required": [
+                  "name",
+                  "gtin13",
+                  "description",
+                  "images",
+                  "price",
+                  "quantity"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "product": {
+                      "$ref": "#/components/schemas/Product"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "Produto adicionado com sucesso",
+                  "product": {
+                    "id": 1,
+                    "name": "Refrigerador Consul CRD37EB",
+                    "gtin13": "6242891301561",
+                    "description": "Facilidade na limpeza, qualidade e confiança Consul para você! Com essa geladeira você terá um melhor aproveitamento dos espaços, o freezer tem divisões que permitem acomodar mais itens e recipientes maiores. Também conta com gavetão de legumes transparente que mantém a temperatura e umidade adequadas para o armazenamento de frutas e hortaliças, preservando suas características naturais e cesta de porta-ovos portátil para 12 unidades, fácil de transportar e empilham-se, otimizando espaço.",
+                    "images": [
+                      "consul-crd37eb/1.webp",
+                      "consul-crd37eb/2.webp",
+                      "consul-crd37eb/3.webp",
+                      "consul-crd37eb/4.webp",
+                      "consul-crd37eb/5.webp"
+                    ],
+                    "price": 189999,
+                    "quantity": 20,
+                    "status": "AVAILABLE",
+                    "createdAt": "2021-03-22 21:06:57",
+                    "updatedAt": null,
+                    "deletedAt": null
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro de validação do corpo",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      },
+      "get": {
+        "tags": ["products"],
+        "summary": "Retorna produtos filtrados ou todos os produtos",
+        "description": "Se houver query, retorna produtos filtrados pelas queries, caso contrário, retorna todos os produtos. O parâmetro name é case insensitive",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "name",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filtrar produtos pelo nome"
+          },
+          {
+            "in": "query",
+            "name": "gtin13",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filtrar produtos pelo gtin13"
+          },
+          {
+            "in": "query",
+            "name": "price",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Filtrar produtos pelo preço"
+          },
+          {
+            "in": "query",
+            "name": "quantity",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Filtrar produtos pela quantidade"
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "type": "string",
+              "enum": ["AVAILABLE", "UNAVAILABLE"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                },
+                "examples": {
+                  "Produtos": {
+                    "value": [
+                      {
+                        "id": 1,
+                        "name": "Refrigerador Consul CRD37EB",
+                        "gtin13": "5586458452048",
+                        "description": "Facilidade na limpeza, qualidade e confiança Consul para você! Com essa geladeira você terá um melhor aproveitamento dos espaços, o freezer tem divisões que permitem acomodar mais itens e recipientes maiores. Também conta com gavetão de legumes transparente que mantém a temperatura e umidade adequadas para o armazenamento de frutas e hortaliças, preservando suas características naturais e cesta de porta-ovos portátil para 12 unidades, fácil de transportar e empilham-se, otimizando espaço.",
+                        "images": [
+                          "consul-crd37eb/1.webp",
+                          "consul-crd37eb/2.webp",
+                          "consul-crd37eb/3.webp",
+                          "consul-crd37eb/4.webp",
+                          "consul-crd37eb/5.webp"
+                        ],
+                        "price": 149999,
+                        "quantity": 65,
+                        "status": "AVAILABLE",
+                        "createdAt": "2021-03-26 10:57:03",
+                        "updatedAt": "2021-03-26 10:57:38",
+                        "deletedAt": "2021-03-26 11:11:15"
+                      },
+                      {
+                        "id": 2,
+                        "name": "Smart TV LED 32\" HD Samsung T4300",
+                        "gtin13": "5647235854147",
+                        "description": "Acesse suas músicas, filmes, notícias, jogos e redes sociais tudo em uma única tela, com o sistema operacional Tizen da Smart TV LED 32\" HD Samsung T4300. Explore diversos aplicativos incluindo o Netflix e assista a séries e filme aclamados pela crítica, tudo isso em uma plataforma Smart rápida e intuitiva. Você também pode usar o recurso de Espelhamento de Tela para acessar conteúdos do seu Smartphone direto na tela da TV, ou se preferir, conecte um dispositivo USB e acesse seus arquivos. Tudo isso, em uma tela de alta resolução HD e tecnologia HDR que proporciona mais brilho e contraste para você aproveitar seu programa tanto nas cenas mais escuras quanto nas de alta luminosidade.",
+                        "images": [
+                          "samsung-t4300/1.webp",
+                          "samsung-t4300/2.webp",
+                          "samsung-t4300/3.webp",
+                          "samsung-t4300/4.webp",
+                          "samsung-t4300/5.webp"
+                        ],
+                        "price": 139999,
+                        "quantity": 50,
+                        "status": "AVAILABLE",
+                        "createdAt": "2021-03-26 10:57:03",
+                        "updatedAt": null,
+                        "deletedAt": null
+                      },
+                      {
+                        "id": 3,
+                        "name": "Forno de Micro-ondas Electrolux MEF41",
+                        "gtin13": "6350232050794",
+                        "description": "O Micro-ondas MEF41 da Electrolux atende a quem gosta de pratos diferenciados, mas não abre mão da praticidade. Ele conta com o menu Gourmet que possui funções pré-programadas para preparar risoto, tomate seco e strogonoff. No menu Meus Favoritos é possível gravar suas 3 receitas mais utilizadas para agilizar seu dia-a-dia. O MEF41 possui também menus especiais com receitas já programadas na memória como o Kids e o Light. O menu Kids atende às preferências das crianças e oferece as teclas Pipoca, Hambúrguer e Brigadeiro. Enquanto isso, o menu Light é perfeito para quem prefere pratos mais saudáveis, com menos gordura, mas sem deixar o sabor de lado, contando com as teclas Frutas, Vegetais e Sopas.",
+                        "images": [
+                          "electrolux-mef41/1.webp",
+                          "electrolux-mef41/2.webp",
+                          "electrolux-mef41/3.webp",
+                          "electrolux-mef41/4.webp",
+                          "electrolux-mef41/5.webp"
+                        ],
+                        "price": 54999,
+                        "quantity": 70,
+                        "status": "AVAILABLE",
+                        "createdAt": "2021-03-26 10:57:03",
+                        "updatedAt": null,
+                        "deletedAt": null
+                      },
+                      {
+                        "id": 4,
+                        "name": "Monitor Gamer Samsung 24\" SD332",
+                        "gtin13": "8953244496128",
+                        "description": "Ultrarrápido e cheio de recursos, o Monitor Gamer Samsung 24\" SD332 chegou para melhorar a sua performance para as próximas conquistas. Com o tempo de resposta de 1ms ultrarrápido é excelente para games de ação que exigem reflexos rápidos e precisos. Prepare-se para momentos eletrizantes. Jogue por horas a fio sem o risco de prejudicar olhos e causar fadiga ocular. O Samsung Gaming Monitor tem a inovadora tecnologia Flicker-Free, reduz a tremulação causada pelo brilho da tela e evita o cansaço dos olhos depois de passar horas de frente para o monitor. A configuração de brilho automático ajusta o brilho da tela, com base na luminescência dos pretos, reduzindo o consumo de energia.",
+                        "images": [
+                          "samsung-sd332/1.webp",
+                          "samsung-sd332/2.webp",
+                          "samsung-sd332/3.webp",
+                          "samsung-sd332/4.webp",
+                          "samsung-sd332/5.webp"
+                        ],
+                        "price": 89999,
+                        "quantity": 30,
+                        "status": "AVAILABLE",
+                        "createdAt": "2021-03-26 10:57:03",
+                        "updatedAt": null,
+                        "deletedAt": null
+                      },
+                      {
+                        "id": 5,
+                        "name": "Impressora HP Laser 107w Wireless",
+                        "gtin13": "2548264295900",
+                        "description": "Desempenho de laser a um preço acessível. Obtenha desempenho de impressão produtivo a um preço acessível. Produza resultados de alta qualidade e imprima e digitalize a partir de seu smartphone.",
+                        "images": [
+                          "hp-107w/1.webp",
+                          "hp-107w/2.webp",
+                          "hp-107w/3.webp",
+                          "hp-107w/4.webp",
+                          "hp-107w/5.webp"
+                        ],
+                        "price": 89999,
+                        "quantity": 20,
+                        "status": "AVAILABLE",
+                        "createdAt": "2021-03-26 10:57:03",
+                        "updatedAt": null,
+                        "deletedAt": null
+                      }
+                    ]
+                  },
+                  "Sem produtos": {
+                    "value": []
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/products/{productId}": {
+      "get": {
+        "tags": ["products"],
+        "summary": "Retorna um produto pelo Id.",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "description": "ID do produto.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro de validação no parâmetro",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "errors": [
+                    {
+                      "id": "O parâmetro ID precisa ser um inteiro maior ou igual a 1"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Produto não encontrado",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "id": "Produto de ID 42 não encontrado"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      },
+      "patch": {
+        "tags": ["products"],
+        "summary": "Atualiza um produto pelo Id",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "description": "ID do produto.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "example": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Product"
+              },
+              "example": {
+                "price": 149999,
+                "quantity": 65
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessProduct"
+                },
+                "example": {
+                  "message": "Produto atualizado com sucesso",
+                  "product": {
+                    "id": 1,
+                    "name": "Refrigerador Consul CRD37EB",
+                    "gtin13": "5586458452048",
+                    "description": "Facilidade na limpeza, qualidade e confiança Consul para você! Com essa geladeira você terá um melhor aproveitamento dos espaços, o freezer tem divisões que permitem acomodar mais itens e recipientes maiores. Também conta com gavetão de legumes transparente que mantém a temperatura e umidade adequadas para o armazenamento de frutas e hortaliças, preservando suas características naturais e cesta de porta-ovos portátil para 12 unidades, fácil de transportar e empilham-se, otimizando espaço.",
+                    "images": [
+                      "consul-crd37eb/1.webp",
+                      "consul-crd37eb/2.webp",
+                      "consul-crd37eb/3.webp",
+                      "consul-crd37eb/4.webp",
+                      "consul-crd37eb/5.webp"
+                    ],
+                    "price": "149999,",
+                    "quantity": "65,",
+                    "status": "AVAILABLE",
+                    "createdAt": "2021-03-26 10:57:03",
+                    "updatedAt": "2021-03-26 10:57:38",
+                    "deletedAt": null
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro: validação do corpo, no parâmetro ID ou produto já deletado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Validação no parâmetro": {
+                    "value": {
+                      "errors": [
+                        {
+                          "id": "O parâmetro ID precisa ser um inteiro maior ou igual a 1"
+                        }
+                      ]
+                    }
+                  },
+                  "Validação no corpo": {
+                    "value": {
+                      "errors": [
+                        {
+                          "price": "Deve ser do tipo Number inteiro em centavos com valor mínimo 1 e máximo 2147483647"
+                        }
+                      ]
+                    }
+                  },
+                  "Produto deletado": {
+                    "value": {
+                      "errors": [
+                        {
+                          "id": "O produto de ID 42 já foi deletado"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Produto não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "errors": [
+                    {
+                      "id": "Produto de ID 15 não encontrado"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["products"],
+        "summary": "Deleta um produto pelo Id",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "description": "ID do produto.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessProduct"
+                },
+                "example": {
+                  "message": "Produto deletado com sucesso",
+                  "product": {
+                    "id": 1,
+                    "name": "Refrigerador Consul CRD37EB",
+                    "gtin13": "5586458452048",
+                    "description": "Facilidade na limpeza, qualidade e confiança Consul para você! Com essa geladeira você terá um melhor aproveitamento dos espaços, o freezer tem divisões que permitem acomodar mais itens e recipientes maiores. Também conta com gavetão de legumes transparente que mantém a temperatura e umidade adequadas para o armazenamento de frutas e hortaliças, preservando suas características naturais e cesta de porta-ovos portátil para 12 unidades, fácil de transportar e empilham-se, otimizando espaço.",
+                    "images": [
+                      "consul-crd37eb/1.webp",
+                      "consul-crd37eb/2.webp",
+                      "consul-crd37eb/3.webp",
+                      "consul-crd37eb/4.webp",
+                      "consul-crd37eb/5.webp"
+                    ],
+                    "price": 149999,
+                    "quantity": 65,
+                    "status": "AVAILABLE",
+                    "createdAt": "2021-03-26 10:57:03",
+                    "updatedAt": "2021-03-26 10:57:38",
+                    "deletedAt": "2021-03-26 11:11:15"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erros de validação ou produto já deletado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Validação no parâmetro": {
+                    "value": {
+                      "errors": [
+                        {
+                          "id": "O parâmetro ID precisa ser um inteiro maior ou igual a 1"
+                        }
+                      ]
+                    }
+                  },
+                  "Produto já deletado": {
+                    "value": {
+                      "errors": [
+                        {
+                          "id": "O produto de ID 42 já foi deletado"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Produto não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "errors": [
+                    {
+                      "id": "Produto de ID 42 não encontrado"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/emails": {
+      "post": {
+        "tags": ["emails"],
+        "summary": "Adiciona um email",
+        "description": "Adiciona um email novo, caso todas as validações passem",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Email"
+                  }
+                ],
+                "required": ["from", "to", "body"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessEmail"
+                },
+                "example": {
+                  "message": "Email adicionado com sucesso",
+                  "email": {
+                    "id": 1,
+                    "from": "example@mail.com",
+                    "to": "john@doe.com",
+                    "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed turpis magna, varius in odio vitae, condimentum lacinia est. In est eros, volutpat at diam ac, lobortis convallis magna. Maecenas ac tincidunt elit. Curabitur porttitor ante ante, vel rutrum erat tempus nec. In rutrum ante malesuada, placerat neque porta, fermentum nisi. Nulla facilisi. Proin sollicitudin ut diam nec scelerisque. Donec mattis facilisis odio non dapibus. Duis pretium, est id aliquet dignissim, leo ligula lacinia lectus, quis sollicitudin neque magna vel arcu."
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro de validação do corpo",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "errors": [
+                    {
+                      "from": "Deve ser do tipo String que contenha um email de comprimento mínimo 1 e máximo 64"
+                    },
+                    {
+                      "to": "Deve ser do tipo String que contenha um email de comprimento mínimo 1 e máximo 64"
+                    },
+                    {
+                      "body": "Deve ser do tipo String de comprimento mínimo 1 e máximo 65535"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      },
+      "get": {
+        "tags": ["emails"],
+        "summary": "Retorna emails filtrados ou todos os emails",
+        "description": "Se houver query, retorna emails filtrados pelas queries, caso contrário, retorna todos os emails. Os parâmetros from e to são case insensitive",
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "body",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Email"
+                  }
+                },
+                "examples": {
+                  "Emails": {
+                    "value": [
+                      {
+                        "id": 1,
+                        "from": "example@mail.com",
+                        "to": "john@doe.com",
+                        "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed turpis magna, varius in odio vitae, condimentum lacinia est. In est eros, volutpat at diam ac, lobortis convallis magna. Maecenas ac tincidunt elit. Curabitur porttitor ante ante, vel rutrum erat tempus nec. In rutrum ante malesuada, placerat neque porta, fermentum nisi. Nulla facilisi. Proin sollicitudin ut diam nec scelerisque. Donec mattis facilisis odio non dapibus. Duis pretium, est id aliquet dignissim, leo ligula lacinia lectus, quis sollicitudin neque magna vel arcu. "
+                      },
+                      {
+                        "id": 2,
+                        "from": "elonmusk@realmail.com",
+                        "to": "you@dev.com",
+                        "body": "Do you want to work at SpaceX?"
+                      },
+                      {
+                        "id": 3,
+                        "from": "notsuspicious@mail.com",
+                        "to": "hydenz@mail.com",
+                        "body": "You won $1,000,000! Click here to claim it!"
+                      }
+                    ]
+                  },
+                  "Sem emails": {
+                    "value": []
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/emails/{emailId}": {
+      "get": {
+        "tags": ["emails"],
+        "summary": "Retorna um email pelo Id",
+        "parameters": [
+          {
+            "name": "emailId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Email"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro de validação do parâmetro",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "errors": [
+                    {
+                      "id": "O parâmetro ID precisa ser um inteiro maior ou igual a 1"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Email não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "errors": [
+                    {
+                      "id": "Email de ID 42 não encontrado"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      },
+      "patch": {
+        "tags": ["emails"],
+        "summary": "Atualiza um email pelo Id",
+        "parameters": [
+          {
+            "name": "emailId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Email"
+              },
+              "example": {
+                "from": "someone@mail.com",
+                "to": "john@doe.com",
+                "body": "Patch Example"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessEmail"
+                },
+                "example": {
+                  "message": "Email atualizado com sucesso",
+                  "email": {
+                    "id": 1,
+                    "from": "someone@mail.com",
+                    "to": "john@doe.com",
+                    "body": "Patch Example"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro de validação do corpo ou do parâmetro",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Validação no parâmetro": {
+                    "value": {
+                      "errors": [
+                        {
+                          "id": "O parâmetro ID precisa ser um inteiro maior ou igual a 1"
+                        }
+                      ]
+                    }
+                  },
+                  "Validação no corpo": {
+                    "value": {
+                      "errors": [
+                        {
+                          "from": "Deve ser do tipo String que contenha um email de comprimento mínimo 1 e máximo 64"
+                        },
+                        {
+                          "to": "Deve ser do tipo String que contenha um email de comprimento mínimo 1 e máximo 64"
+                        },
+                        {
+                          "body": "Deve ser do tipo String de comprimento mínimo 1 e máximo 65535"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Email não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "errors": [
+                    {
+                      "id": "Email de ID 42 não encontrado"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["emails"],
+        "summary": "Deleta um email pelo Id",
+        "parameters": [
+          {
+            "name": "emailId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Email deletado com sucesso"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro de validação do parâmetro",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": [
+                    {
+                      "id": "O parâmetro ID precisa ser um inteiro maior ou igual a 1"
+                    }
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Email não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "errors": [
+                    {
+                      "id": "Email de ID 42 não encontrado"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "InternalError": {
+        "description": "Erro interno no servidor",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "errors": [
+                {
+                  "message": "Erro interno no servidor"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "Product": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1,
+            "maxLength": 10,
+            "example": 1,
+            "readOnly": true
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "example": "Refrigerador Consul CRD37EB"
+          },
+          "gtin13": {
+            "type": "string",
+            "minLength": 13,
+            "maxLength": 13,
+            "example": 6242891301561
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "example": "Facilidade na limpeza, qualidade e confiança Consul para você! Com essa geladeira você terá um melhor aproveitamento dos espaços, o freezer tem divisões que permitem acomodar mais itens e recipientes maiores. Também conta com gavetão de legumes transparente que mantém a temperatura e umidade adequadas para o armazenamento de frutas e hortaliças, preservando suas características naturais e cesta de porta-ovos portátil para 12 unidades, fácil de transportar e empilham-se, otimizando espaço."
+          },
+          "images": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "example": [
+              "consul-crd37eb/1.webp",
+              "consul-crd37eb/2.webp",
+              "consul-crd37eb/3.webp",
+              "consul-crd37eb/4.webp",
+              "consul-crd37eb/5.webp"
+            ]
+          },
+          "price": {
+            "type": "integer",
+            "minimum": 1,
+            "maxLength": 10,
+            "example": 189999
+          },
+          "quantity": {
+            "type": "integer",
+            "minimum": 1,
+            "maxLength": 10,
+            "example": 20
+          },
+          "status": {
+            "type": "string",
+            "enum": ["AVAILABLE", "UNAVAILABLE"],
+            "default": "AVAILABLE",
+            "example": "AVAILABLE"
+          },
+          "createdAt": {
+            "type": "string",
+            "pattern": "/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]$/",
+            "example": "2021-03-22 21:06:57",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "pattern": "/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]$/",
+            "nullable": true,
+            "example": null,
+            "readOnly": true
+          },
+          "deletedAt": {
+            "type": "string",
+            "pattern": "/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]$/",
+            "nullable": true,
+            "example": null,
+            "readOnly": true
+          }
+        }
+      },
+      "Email": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1,
+            "maxLength": 10,
+            "example": 1,
+            "readOnly": true
+          },
+          "from": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "example": "example@mail.com"
+          },
+          "to": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "example": "john@doe.com"
+          },
+          "body": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 65535,
+            "example": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed turpis magna, varius in odio vitae, condimentum lacinia est. In est eros, volutpat at diam ac, lobortis convallis magna. Maecenas ac tincidunt elit. Curabitur porttitor ante ante, vel rutrum erat tempus nec. In rutrum ante malesuada, placerat neque porta, fermentum nisi. Nulla facilisi. Proin sollicitudin ut diam nec scelerisque. Donec mattis facilisis odio non dapibus. Duis pretium, est id aliquet dignissim, leo ligula lacinia lectus, quis sollicitudin neque magna vel arcu."
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              },
+              "example": [
+                {
+                  "name": "Deve ser do tipo String de comprimento mínimo 1 e máximo 128"
+                },
+                {
+                  "gtin13": "Este gtin13 já está sendo usado"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "SuccessProduct": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "product": {
+            "$ref": "#/components/schemas/Product"
+          }
+        }
+      },
+      "SuccessEmail": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "email": {
+            "$ref": "#/components/schemas/Email"
+          }
+        }
+      }
+    }
+  }
+}
