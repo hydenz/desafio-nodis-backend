@@ -5,8 +5,7 @@
   "main": "api.js",
   "scripts": {
     "dev": "nodemon api.js",
-    "preprod": "cd db && knex migrate:latest && knex seed:run",
-    "prod": "node api.js",
+    "prod": "pm2 start api.js --name desafio-nodis-backend",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
