@@ -1,0 +1,1983 @@
+{
+	"info": {
+		"_postman_id": "2d21a01d-f526-4e5c-bf19-c09a2299a578",
+		"name": "Desafio Nodis",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/products",
+			"item": [
+				{
+					"name": "Get Product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/products/50",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"products",
+								"50"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Parâmetro inválido",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3001/products/parametroInvalido",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"products",
+										"parametroInvalido"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "79"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4f-+n4Vx5QnjR17h40YraQk1007ock\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Mar 2021 22:12:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errors\": [\n        {\n            \"id\": \"O parâmetro ID precisa ser um inteiro maior ou igual a 1\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Query 2",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3001/products?name=z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"products"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "z",
+											"description": "Filtra os produtos pelo name (case insensitive)"
+										},
+										{
+											"key": "gtin13",
+											"value": "6461481589292",
+											"disabled": true
+										},
+										{
+											"key": "price",
+											"value": "189999",
+											"disabled": true
+										},
+										{
+											"key": "quantity",
+											"value": "20",
+											"disabled": true
+										},
+										{
+											"key": "status",
+											"value": "AVAILABLE",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Mar 2021 22:22:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[]"
+						},
+						{
+							"name": "Todos",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3001/products/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"products",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "4510"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"119e-sjmGMLeqi6cuHdF7ngyybUqxKMM\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Mar 2021 22:11:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Refrigerador Consul CRD37EB\",\n        \"gtin13\": \"6461481589292\",\n        \"description\": \"Facilidade na limpeza, qualidade e confiança Consul para você! Com essa geladeira você terá um melhor aproveitamento dos espaços, o freezer tem divisões que permitem acomodar mais itens e recipientes maiores. Também conta com gavetão de legumes transparente que mantém a temperatura e umidade adequadas para o armazenamento de frutas e hortaliças, preservando suas características naturais e cesta de porta-ovos portátil para 12 unidades, fácil de transportar e empilham-se, otimizando espaço.\",\n        \"images\": [\n            \"consul-crd37eb/1.webp\",\n            \"consul-crd37eb/2.webp\",\n            \"consul-crd37eb/3.webp\",\n            \"consul-crd37eb/4.webp\",\n            \"consul-crd37eb/5.webp\"\n        ],\n        \"price\": 189999,\n        \"quantity\": 20,\n        \"status\": \"AVAILABLE\",\n        \"createdAt\": \"2021-03-28 12:23:24\",\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Smart TV LED 32\\\" HD Samsung T4300\",\n        \"gtin13\": \"8628820949767\",\n        \"description\": \"Acesse suas músicas, filmes, notícias, jogos e redes sociais tudo em uma única tela, com o sistema operacional Tizen da Smart TV LED 32\\\" HD Samsung T4300. Explore diversos aplicativos incluindo o Netflix e assista a séries e filme aclamados pela crítica, tudo isso em uma plataforma Smart rápida e intuitiva. Você também pode usar o recurso de Espelhamento de Tela para acessar conteúdos do seu Smartphone direto na tela da TV, ou se preferir, conecte um dispositivo USB e acesse seus arquivos. Tudo isso, em uma tela de alta resolução HD e tecnologia HDR que proporciona mais brilho e contraste para você aproveitar seu programa tanto nas cenas mais escuras quanto nas de alta luminosidade.\",\n        \"images\": [\n            \"samsung-t4300/1.webp\",\n            \"samsung-t4300/2.webp\",\n            \"samsung-t4300/3.webp\",\n            \"samsung-t4300/4.webp\",\n            \"samsung-t4300/5.webp\"\n        ],\n        \"price\": 139999,\n        \"quantity\": 50,\n        \"status\": \"AVAILABLE\",\n        \"createdAt\": \"2021-03-28 12:23:24\",\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Forno de Micro-ondas Electrolux MEF41\",\n        \"gtin13\": \"5866136474657\",\n        \"description\": \"O Micro-ondas MEF41 da Electrolux atende a quem gosta de pratos diferenciados, mas não abre mão da praticidade. Ele conta com o menu Gourmet que possui funções pré-programadas para preparar risoto, tomate seco e strogonoff. No menu Meus Favoritos é possível gravar suas 3 receitas mais utilizadas para agilizar seu dia-a-dia. O MEF41 possui também menus especiais com receitas já programadas na memória como o Kids e o Light. O menu Kids atende às preferências das crianças e oferece as teclas Pipoca, Hambúrguer e Brigadeiro. Enquanto isso, o menu Light é perfeito para quem prefere pratos mais saudáveis, com menos gordura, mas sem deixar o sabor de lado, contando com as teclas Frutas, Vegetais e Sopas.\",\n        \"images\": [\n            \"electrolux-mef41/1.webp\",\n            \"electrolux-mef41/2.webp\",\n            \"electrolux-mef41/3.webp\",\n            \"electrolux-mef41/4.webp\",\n            \"electrolux-mef41/5.webp\"\n        ],\n        \"price\": 54999,\n        \"quantity\": 70,\n        \"status\": \"AVAILABLE\",\n        \"createdAt\": \"2021-03-28 12:23:24\",\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    },\n    {\n        \"id\": 4,\n        \"name\": \"Monitor Gamer Samsung 24\\\" SD332\",\n        \"gtin13\": \"1621859536039\",\n        \"description\": \"Ultrarrápido e cheio de recursos, o Monitor Gamer Samsung 24\\\" SD332 chegou para melhorar a sua performance para as próximas conquistas. Com o tempo de resposta de 1ms ultrarrápido é excelente para games de ação que exigem reflexos rápidos e precisos. Prepare-se para momentos eletrizantes. Jogue por horas a fio sem o risco de prejudicar olhos e causar fadiga ocular. O Samsung Gaming Monitor tem a inovadora tecnologia Flicker-Free, reduz a tremulação causada pelo brilho da tela e evita o cansaço dos olhos depois de passar horas de frente para o monitor. A configuração de brilho automático ajusta o brilho da tela, com base na luminescência dos pretos, reduzindo o consumo de energia.\",\n        \"images\": [\n            \"samsung-sd332/1.webp\",\n            \"samsung-sd332/2.webp\",\n            \"samsung-sd332/3.webp\",\n            \"samsung-sd332/4.webp\",\n            \"samsung-sd332/5.webp\"\n        ],\n        \"price\": 89999,\n        \"quantity\": 30,\n        \"status\": \"AVAILABLE\",\n        \"createdAt\": \"2021-03-28 12:23:24\",\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    },\n    {\n        \"id\": 5,\n        \"name\": \"Impressora HP Laser 107w Wireless\",\n        \"gtin13\": \"3126020355552\",\n        \"description\": \"Desempenho de laser a um preço acessível. Obtenha desempenho de impressão produtivo a um preço acessível. Produza resultados de alta qualidade e imprima e digitalize a partir de seu smartphone.\",\n        \"images\": [\n            \"hp-107w/1.webp\",\n            \"hp-107w/2.webp\",\n            \"hp-107w/3.webp\",\n            \"hp-107w/4.webp\",\n            \"hp-107w/5.webp\"\n        ],\n        \"price\": 89999,\n        \"quantity\": 20,\n        \"status\": \"AVAILABLE\",\n        \"createdAt\": \"2021-03-28 12:23:24\",\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    }\n]"
+						},
+						{
+							"name": "Parâmetro 404",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3001/products/50",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"products",
+										"50"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "54"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"36-T6eYXPvqZnLWHTpam2DATwGMC/w\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Mar 2021 22:27:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errors\": [\n        {\n            \"id\": \"Produto de ID 50 não encontrado\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Query",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3001/products?name=refr&gtin13=6461481589292&price=189999&quantity=20&status=AVAILABLE",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"products"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "refr",
+											"description": "Filtra os produtos pelo name (case insensitive)"
+										},
+										{
+											"key": "gtin13",
+											"value": "6461481589292"
+										},
+										{
+											"key": "price",
+											"value": "189999"
+										},
+										{
+											"key": "quantity",
+											"value": "20"
+										},
+										{
+											"key": "status",
+											"value": "AVAILABLE"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "845"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34d-SddryNjc7tGDVObSHkGUIxXVex4\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Mar 2021 22:14:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Refrigerador Consul CRD37EB\",\n        \"gtin13\": \"6461481589292\",\n        \"description\": \"Facilidade na limpeza, qualidade e confiança Consul para você! Com essa geladeira você terá um melhor aproveitamento dos espaços, o freezer tem divisões que permitem acomodar mais itens e recipientes maiores. Também conta com gavetão de legumes transparente que mantém a temperatura e umidade adequadas para o armazenamento de frutas e hortaliças, preservando suas características naturais e cesta de porta-ovos portátil para 12 unidades, fácil de transportar e empilham-se, otimizando espaço.\",\n        \"images\": [\n            \"consul-crd37eb/1.webp\",\n            \"consul-crd37eb/2.webp\",\n            \"consul-crd37eb/3.webp\",\n            \"consul-crd37eb/4.webp\",\n            \"consul-crd37eb/5.webp\"\n        ],\n        \"price\": 189999,\n        \"quantity\": 20,\n        \"status\": \"AVAILABLE\",\n        \"createdAt\": \"2021-03-28 12:23:24\",\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    }\n]"
+						},
+						{
+							"name": "Parâmetro",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3001/products/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"products",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "843"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34b-I+hP4UChHDz29al1G8oA51TGZcE\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Mar 2021 22:11:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"name\": \"Refrigerador Consul CRD37EB\",\n    \"gtin13\": \"6461481589292\",\n    \"description\": \"Facilidade na limpeza, qualidade e confiança Consul para você! Com essa geladeira você terá um melhor aproveitamento dos espaços, o freezer tem divisões que permitem acomodar mais itens e recipientes maiores. Também conta com gavetão de legumes transparente que mantém a temperatura e umidade adequadas para o armazenamento de frutas e hortaliças, preservando suas características naturais e cesta de porta-ovos portátil para 12 unidades, fácil de transportar e empilham-se, otimizando espaço.\",\n    \"images\": [\n        \"consul-crd37eb/1.webp\",\n        \"consul-crd37eb/2.webp\",\n        \"consul-crd37eb/3.webp\",\n        \"consul-crd37eb/4.webp\",\n        \"consul-crd37eb/5.webp\"\n    ],\n    \"price\": 189999,\n    \"quantity\": 20,\n    \"status\": \"AVAILABLE\",\n    \"createdAt\": \"2021-03-28 12:23:24\",\n    \"updatedAt\": null,\n    \"deletedAt\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Add Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Corpo inválido",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/products",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"products"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "525"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"20d-UP2U1LI3rvq7f14V9P/+lEYtvX4\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Mar 2021 22:26:21 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errors\": [\n        {\n            \"name\": \"Deve ser do tipo String de comprimento mínimo 1 e máximo 128\"\n        },\n        {\n            \"gtin13\": \"Deve ser do tipo String de comprimento 13\"\n        },\n        {\n            \"description\": \"Deve ser do tipo String de comprimento mínimo 1 e máximo 1024\"\n        },\n        {\n            \"images\": \"Deve ser do tipo Array de Strings que, quando transformado em JSON String, ter comprimento máximo 1024\"\n        },\n        {\n            \"price\": \"Deve ser do tipo Number inteiro em centavos com valor mínimo 1 e máximo 2147483647\"\n        },\n        {\n            \"quantity\": \"Deve ser do tipo Number inteiro com valor mínimo 1 e máximo 2147483647\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Sucesso",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Dogecoin\",\r\n    \"gtin13\": \"3549225442810\",\r\n    \"description\": \"To the moon!\",\r\n    \"images\": [\r\n        \"doge/1.webp\",\r\n        \"doge/2.webp\",\r\n        \"doge/3.webp\"\r\n    ],\r\n    \"price\": 283,\r\n    \"quantity\": 100\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/products",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"products"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "304"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"130-jw4kWsJsZvVeYqN3dFENXtI3L5Y\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Mar 2021 22:25:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Produto adicionado com sucesso\",\n    \"product\": {\n        \"id\": 6,\n        \"name\": \"Dogecoin\",\n        \"gtin13\": \"3549225442810\",\n        \"description\": \"To the moon!\",\n        \"images\": [\n            \"doge/1.webp\",\n            \"doge/2.webp\",\n            \"doge/3.webp\"\n        ],\n        \"price\": 283,\n        \"quantity\": 100,\n        \"status\": \"AVAILABLE\",\n        \"createdAt\": \"2021-03-28 19:25:52\",\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/products/60",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"products",
+								"60"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Parâmetro inválido",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3001/products/invalido",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"products",
+										"invalido"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "79"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4f-+n4Vx5QnjR17h40YraQk1007ock\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Mar 2021 22:30:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errors\": [\n        {\n            \"id\": \"O parâmetro ID precisa ser um inteiro maior ou igual a 1\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Parâmetro 404",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3001/products/60",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"products",
+										"60"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "54"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"36-+0WTj2ybNCgPdItu+Fe6y5uiyCU\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Mar 2021 22:30:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errors\": [\n        {\n            \"id\": \"Produto de ID 60 não encontrado\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Sucesso",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3001/products/6",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"products",
+										"6"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "319"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"13f-3s5jvjMbJwY2yJmyX9I1te12JJA\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Mar 2021 22:30:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Produto deletado com sucesso\",\n    \"product\": {\n        \"id\": 6,\n        \"name\": \"Dogecoin\",\n        \"gtin13\": \"3549225442810\",\n        \"description\": \"To the moon!\",\n        \"images\": [\n            \"doge/1.webp\",\n            \"doge/2.webp\",\n            \"doge/3.webp\"\n        ],\n        \"price\": 283,\n        \"quantity\": 100,\n        \"status\": \"AVAILABLE\",\n        \"createdAt\": \"2021-03-28 19:25:52\",\n        \"updatedAt\": null,\n        \"deletedAt\": \"2021-03-28 19:30:09\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Product",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"price\": 149999,\r\n  \"quantity\": 65\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/products/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"products",
+								"6"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Produto já deletado",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"price\": 149999,\r\n  \"quantity\": 65\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/products/6",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"products",
+										"6"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "56"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"38-sXX9U5B+wfCnB0aKjH6RMbGWicY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Mar 2021 22:31:00 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errors\": [\n        {\n            \"id\": \"O produto de ID 6 já foi deletado\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Parâmetro 404",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"price\": 149999,\r\n  \"quantity\": 65\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/products/50",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"products",
+										"50"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "54"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"36-T6eYXPvqZnLWHTpam2DATwGMC/w\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Mar 2021 22:29:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errors\": [\n        {\n            \"id\": \"Produto de ID 50 não encontrado\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Parâmetro inválido",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"price\": 149999,\r\n  \"quantity\": 65\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/products/invalido",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"products",
+										"invalido"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "79"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4f-+n4Vx5QnjR17h40YraQk1007ock\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Mar 2021 22:29:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errors\": [\n        {\n            \"id\": \"O parâmetro ID precisa ser um inteiro maior ou igual a 1\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Sucesso",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"price\": 149999,\r\n  \"quantity\": 65\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/products/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"products",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "915"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"393-+dnPS5BDRGrhTNVIcfe15vGIiv4\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Mar 2021 22:26:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Produto atualizado com sucesso\",\n    \"product\": {\n        \"id\": 1,\n        \"name\": \"Refrigerador Consul CRD37EB\",\n        \"gtin13\": \"8801325915840\",\n        \"description\": \"Facilidade na limpeza, qualidade e confiança Consul para você! Com essa geladeira você terá um melhor aproveitamento dos espaços, o freezer tem divisões que permitem acomodar mais itens e recipientes maiores. Também conta com gavetão de legumes transparente que mantém a temperatura e umidade adequadas para o armazenamento de frutas e hortaliças, preservando suas características naturais e cesta de porta-ovos portátil para 12 unidades, fácil de transportar e empilham-se, otimizando espaço.\",\n        \"images\": [\n            \"consul-crd37eb/1.webp\",\n            \"consul-crd37eb/2.webp\",\n            \"consul-crd37eb/3.webp\",\n            \"consul-crd37eb/4.webp\",\n            \"consul-crd37eb/5.webp\"\n        ],\n        \"price\": 149999,\n        \"quantity\": 65,\n        \"status\": \"AVAILABLE\",\n        \"createdAt\": \"2021-03-28 19:25:27\",\n        \"updatedAt\": \"2021-03-28 19:26:56\",\n        \"deletedAt\": null\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "/emails",
+			"item": [
+				{
+					"name": "Get Email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/emails?from=naoEncontrado",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"emails"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "naoEncontrado"
+								},
+								{
+									"key": "to",
+									"value": "john@doe.com",
+									"disabled": true
+								},
+								{
+									"key": "body",
+									"value": "ipsum",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Parâmetro inválido",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3001/emails/invalido",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"emails",
+										"invalido"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "79"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4f-+n4Vx5QnjR17h40YraQk1007ock\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Mar 2021 22:33:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errors\": [\n        {\n            \"id\": \"O parâmetro ID precisa ser um inteiro maior ou igual a 1\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Query",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3001/emails?from=example@mail.com&to=john@doe.com&body=ipsum",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"emails"
+									],
+									"query": [
+										{
+											"key": "from",
+											"value": "example@mail.com"
+										},
+										{
+											"key": "to",
+											"value": "john@doe.com"
+										},
+										{
+											"key": "body",
+											"value": "ipsum"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "607"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"25f-8E7P0HvA1dh/z3ETneHG6B+vR58\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Mar 2021 22:34:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"from\": \"example@mail.com\",\n        \"to\": \"john@doe.com\",\n        \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed turpis magna, varius in odio vitae, condimentum lacinia est. In est eros, volutpat at diam ac, lobortis convallis magna. Maecenas ac tincidunt elit. Curabitur porttitor ante ante, vel rutrum erat tempus nec. In rutrum ante malesuada, placerat neque porta, fermentum nisi. Nulla facilisi. Proin sollicitudin ut diam nec scelerisque. Donec mattis facilisis odio non dapibus. Duis pretium, est id aliquet dignissim, leo ligula lacinia lectus, quis sollicitudin neque magna vel arcu. \"\n    }\n]"
+						},
+						{
+							"name": "Parâmetro 404",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3001/emails/6",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"emails",
+										"6"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"33-AXux6LF6HxACUK5tLOL6STxscKM\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Mar 2021 22:33:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errors\": [\n        {\n            \"id\": \"Email de ID 6 não encontrado\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Parâmetro",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3001/emails/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"emails",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "605"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"25d-+0jVOfDb8cSQTRsggnJRdsTjVps\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Mar 2021 22:32:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"from\": \"example@mail.com\",\n    \"to\": \"john@doe.com\",\n    \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed turpis magna, varius in odio vitae, condimentum lacinia est. In est eros, volutpat at diam ac, lobortis convallis magna. Maecenas ac tincidunt elit. Curabitur porttitor ante ante, vel rutrum erat tempus nec. In rutrum ante malesuada, placerat neque porta, fermentum nisi. Nulla facilisi. Proin sollicitudin ut diam nec scelerisque. Donec mattis facilisis odio non dapibus. Duis pretium, est id aliquet dignissim, leo ligula lacinia lectus, quis sollicitudin neque magna vel arcu. \"\n}"
+						},
+						{
+							"name": "Query 2",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3001/emails?from=naoEncontrado",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"emails"
+									],
+									"query": [
+										{
+											"key": "from",
+											"value": "naoEncontrado"
+										},
+										{
+											"key": "to",
+											"value": "john@doe.com",
+											"disabled": true
+										},
+										{
+											"key": "body",
+											"value": "ipsum",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Mar 2021 22:36:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[]"
+						},
+						{
+							"name": "Todos",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3001/emails",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"emails"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "823"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"337-lSMMQcuaA0f/6jcSFsnFzIud3to\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Mar 2021 22:31:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"from\": \"example@mail.com\",\n        \"to\": \"john@doe.com\",\n        \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed turpis magna, varius in odio vitae, condimentum lacinia est. In est eros, volutpat at diam ac, lobortis convallis magna. Maecenas ac tincidunt elit. Curabitur porttitor ante ante, vel rutrum erat tempus nec. In rutrum ante malesuada, placerat neque porta, fermentum nisi. Nulla facilisi. Proin sollicitudin ut diam nec scelerisque. Donec mattis facilisis odio non dapibus. Duis pretium, est id aliquet dignissim, leo ligula lacinia lectus, quis sollicitudin neque magna vel arcu. \"\n    },\n    {\n        \"id\": 2,\n        \"from\": \"elonmusk@realmail.com\",\n        \"to\": \"you@dev.com\",\n        \"body\": \"Do you want to work at SpaceX?\"\n    },\n    {\n        \"id\": 3,\n        \"from\": \"notsuspicious@mail.com\",\n        \"to\": \"hydenz@mail.com\",\n        \"body\": \"You won $1,000,000! Click here to claim it!\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Add Email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/emails",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"emails"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Corpo inválido",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/emails",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"emails"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "276"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"114-OPAbJgGhWVle33boMS7js832rHo\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Mar 2021 22:37:29 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errors\": [\n        {\n            \"from\": \"Deve ser do tipo String que contenha um email de comprimento mínimo 1 e máximo 64\"\n        },\n        {\n            \"to\": \"Deve ser do tipo String que contenha um email de comprimento mínimo 1 e máximo 64\"\n        },\n        {\n            \"body\": \"Deve ser do tipo String de comprimento mínimo 1 e máximo 65535\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Sucesso",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"from\": \"back@dev.com\",\r\n    \"to\": \"front@dev.br\",\r\n    \"body\": \"Hello World!\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/emails",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"emails"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "123"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"7b-/n72ZJ1asd2YfNSKIMzeM2TFx2M\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Mar 2021 22:37:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Email adicionado com sucesso\",\n    \"email\": {\n        \"id\": 4,\n        \"from\": \"back@dev.com\",\n        \"to\": \"front@dev.br\",\n        \"body\": \"Hello World!\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Email",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"from\": \"someone@mail.com\",\r\n  \"to\": \"john@doe.com\",\r\n  \"body\": \"Patch Example\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/emails/32",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"emails",
+								"32"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Sucesso",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"from\": \"someone@mail.com\",\r\n  \"to\": \"john@doe.com\",\r\n  \"body\": \"Patch Example\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/emails/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"emails",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "128"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"80-HbDRhnnZJvUlFGLu2H74M0Y1jiE\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Mar 2021 22:37:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Email atualizado com sucesso\",\n    \"email\": {\n        \"id\": 1,\n        \"from\": \"someone@mail.com\",\n        \"to\": \"john@doe.com\",\n        \"body\": \"Patch Example\"\n    }\n}"
+						},
+						{
+							"name": "Parâmetro inválido",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"from\": \"someone@mail.com\",\r\n  \"to\": \"john@doe.com\",\r\n  \"body\": \"Patch Example\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/emails/invalido",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"emails",
+										"invalido"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "79"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4f-+n4Vx5QnjR17h40YraQk1007ock\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Mar 2021 22:38:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errors\": [\n        {\n            \"id\": \"O parâmetro ID precisa ser um inteiro maior ou igual a 1\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Parâmetro 404",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"from\": \"someone@mail.com\",\r\n  \"to\": \"john@doe.com\",\r\n  \"body\": \"Patch Example\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/emails/32",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"emails",
+										"32"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-12jAXz+rJ+FOZ25Rb2BLPjebEas\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Mar 2021 22:38:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errors\": [\n        {\n            \"id\": \"Email de ID 32 não encontrado\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Email",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/emails/32",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"emails",
+								"32"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Sucesso",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3001/emails/4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"emails",
+										"4"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "40"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"28-J/x/9ytMctCQR74tzYoJj+ohvjE\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Mar 2021 22:39:21 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Email deletado com sucesso\"\n}"
+						},
+						{
+							"name": "Parâmetro inválido",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3001/emails/invalido",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"emails",
+										"invalido"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "79"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4f-+n4Vx5QnjR17h40YraQk1007ock\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Mar 2021 22:39:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errors\": [\n        {\n            \"id\": \"O parâmetro ID precisa ser um inteiro maior ou igual a 1\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Parâmetro 404",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3001/emails/32",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"emails",
+										"32"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-12jAXz+rJ+FOZ25Rb2BLPjebEas\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Mar 2021 22:39:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errors\": [\n        {\n            \"id\": \"Email de ID 32 não encontrado\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
