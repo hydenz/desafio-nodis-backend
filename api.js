@@ -13,8 +13,6 @@ const updateEmail = require('./controllers/emails/updateEmail');
 const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('./swagger/swagger.json');
 
-const port = 3001;
-
 const app = express();
 app.use(express.json());
 
@@ -30,4 +28,4 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 app.use(errorHandler);
 
-app.listen(port, () => console.log(`API listening at port ${port}`));
+module.exports = app;

@@ -6,16 +6,11 @@ async function getRows(table, columns) {
     .select()
     .modify((dbQueryBuilder) => {
       if (columns) dbQueryBuilder.where(columns);
-    })
-    .then((resp) => resp)
-    .catch((err) => err);
+    });
 }
 
 async function insertRow(table, row) {
-  return knex(table)
-    .insert(row)
-    .then((id) => id)
-    .catch((err) => next(err));
+  return knex(table).insert(row);
 }
 
 async function checkAnyRowExists(table, columns) {
@@ -30,9 +25,7 @@ async function querySearchProducts(query) {
       query.name && dbQueryBuilder.where('name', 'like', `%${query.name}%`);
       delete query.name;
       dbQueryBuilder.where(query);
-    })
-    .then((resp) => resp)
-    .catch((err) => err);
+    });
 }
 
 async function querySearchEmails(query) {
@@ -43,9 +36,7 @@ async function querySearchEmails(query) {
         const [key, value] = entry;
         dbQueryBuilder.where(key, 'like', `%${value}%`);
       });
-    })
-    .then((resp) => resp)
-    .catch((err) => err);
+    });
 }
 
 module.exports = {

@@ -1,11 +1,14 @@
 const moment = require('moment');
+const path = require('path');
 
 module.exports = {
   client: 'mysql',
   connection: {
     host: 'localhost',
     user: 'root',
-    database: 'desafio-nodis',
+    database: (process.env.NODE_ENV = 'testing'
+      ? 'desafio-nodis-test'
+      : 'desafio-nodis'),
     timezone: 'UTC',
     typeCast: function (field, next) {
       if (field.type == 'DATETIME') {
@@ -21,6 +24,6 @@ module.exports = {
       return next();
     },
   },
-  migrations: { directory: './migrations' },
-  seeds: { directory: './seeds' },
+  migrations: { directory: path.join(__dirname, 'migrations') },
+  seeds: { directory: path.join(__dirname, 'seeds') },
 };
