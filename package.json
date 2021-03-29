@@ -2,14 +2,14 @@
   "name": "desafio-nodis",
   "version": "1.0.0",
   "description": "",
-  "main": "api.js",
+  "main": "index.js",
   "jest": {
     "modulePathIgnorePatterns": [
       "<rootDir>/__tests__/utils/"
     ]
   },
   "scripts": {
-    "dev": "nodemon api.js",
+    "dev": "nodemon index.js",
     "pretest": "cd db && knex migrate:latest && knex seed:run",
     "test": "set NODE_ENV=testing && jest || true",
     "posttest": "cd db && knex migrate:rollback",
