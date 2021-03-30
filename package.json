@@ -2,15 +2,18 @@
   "name": "desafio-nodis",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "jest": {
     "modulePathIgnorePatterns": [
       "<rootDir>/__tests__/utils/"
     ]
   },
   "scripts": {
-    "dev": "nodemon index.js",
-    "pretest": "cd db && knex migrate:latest && knex seed:run",
+    "dev": "nodemon server.js",
+    "initdb": "cd db && knex migrate:latest && knex seed:run",
+    "prestart": "npm run initdb",
+    "start": "node server.js",
+    "pretest": "npm run initdb",
     "test": "set NODE_ENV=testing && jest || true",
     "posttest": "cd db && knex migrate:rollback",
     "coverage": "npm run test -- --coverage"

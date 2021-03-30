@@ -4,12 +4,9 @@ const path = require('path');
 module.exports = {
   client: 'mysql',
   connection: {
-    host: 'localhost',
+    host: 'db',
     user: 'root',
-    database:
-      process.env.NODE_ENV === 'testing'
-        ? 'desafio-nodis-test'
-        : 'desafio-nodis',
+    database: 'desafio-nodis',
     timezone: 'UTC',
     typeCast: function (field, next) {
       if (field.type == 'DATETIME') {
