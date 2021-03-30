@@ -22,9 +22,7 @@ Você pode inicializar o servidor utilizando [Docker](https://www.docker.com/)
 ```bash
 # clonando o repositório
 git clone https://github.com/hydenz/desafio-nodis-backend.git
-# instalando dependências
-npm i
-# inicializando a imagem Docker
+# inicializando o container Docker
 docker compose up
 ```
 
