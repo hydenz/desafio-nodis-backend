@@ -1,5 +1,6 @@
 const express = require('express');
 const errorHandler = require('./middlewares/errorHandler');
+const logs = require('./middlewares/logs');
 
 const addProduct = require('./controllers/products/addProduct');
 const deleteProduct = require('./controllers/products/deleteProduct');
@@ -10,12 +11,18 @@ const getEmail = require('./controllers/emails/getEmail');
 const addEmail = require('./controllers/emails/addEmail');
 const deleteEmail = require('./controllers/emails/deleteEmail');
 const updateEmail = require('./controllers/emails/updateEmail');
+
 const swaggerUi = require('swagger-ui-express');
-const swaggerFile = require('./swagger/swagger.json');
+const swaggerFile = require('./docs/swagger.json');
+
+const cors = require('cors');
 
 const app = express();
-app.use(express.json());
 
+app.use(express.json());
+app.use(cors());
+
+app.use(logs);
 app.use(addProduct);
 app.use(deleteProduct);
 app.use(getProduct);

@@ -29,7 +29,3 @@ docker compose up
 ```
 
 A API estará disponível para consumo em http://localhost:3001
-
-# ⚙️ Todos
-
-- Desenvolver logs de requisições e erros com Morgan
