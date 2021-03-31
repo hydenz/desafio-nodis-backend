@@ -20,4 +20,6 @@ services:
     depends_on:
       - db
     working_dir: /usr/app
+    environment:
+      - DB=db
     command: sh -c "./wait-for db:3306 -t 60  -- echo 'Installing node_modules...' && npm i && npm start"

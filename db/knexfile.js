@@ -4,7 +4,7 @@ const path = require('path');
 module.exports = {
   client: 'mysql',
   connection: {
-    host: 'db',
+    host: process.env.DB || 'localhost',
     user: 'root',
     database: 'desafio-nodis',
     timezone: 'UTC',
