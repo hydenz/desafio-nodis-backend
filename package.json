@@ -10,12 +10,12 @@
   },
   "scripts": {
     "dev": "nodemon server.js",
-    "initdb": "cd db && knex migrate:latest && knex seed:run",
+    "initdb": "cd db && npx knex migrate:latest && npx knex seed:run",
     "prestart": "npm run initdb",
     "start": "node server.js",
     "pretest": "npm run initdb",
     "test": "set NODE_ENV=testing && jest || true",
-    "posttest": "cd db && knex migrate:rollback",
+    "posttest": "cd db && npx knex migrate:rollback",
     "coverage": "npm run test -- --coverage"
   },
   "keywords": [],
