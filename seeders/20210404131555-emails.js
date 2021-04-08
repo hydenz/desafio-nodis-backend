@@ -1,3 +1,5 @@
+'use strict';
+
 const emails = [
   {
     from: 'example@mail.com',
@@ -17,8 +19,12 @@ const emails = [
   },
 ];
 
-exports.seed = async function (knex) {
-  await knex('emails').del();
-  await knex.raw('ALTER TABLE ' + 'emails' + ' AUTO_INCREMENT = 1');
-  return knex('emails').insert(emails);
+module.exports = {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkInsert('emails', emails);
+  },
+
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkDelete('emails');
+  },
 };

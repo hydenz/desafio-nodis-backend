@@ -6,7 +6,8 @@ const {
   queryValidator,
   validate,
 } = require('../../middlewares/emailValidator');
-const { querySearchEmails, getRows } = require('../../utils/db');
+const { Email } = require('../../models/index');
+const { Op } = require('sequelize');
 
 router.get(
   '/emails/:id?',
@@ -21,13 +22,18 @@ router.get(
     const { id } = req.params;
     let rows;
     if (id) {
-      res.json(req.email);
+      rows = req.email;
     }
     // Se houver alguma query
     else if (Object.keys(query).length) {
-      rows = await querySearchEmails(query);
+      const whereObj = {};
+      // Criando todas as queries como substring
+      Object.entries(query).forEach(([k, v]) => {
+        whereObj[k] = { [Op.substring]: v };
+      });
+      rows = await Email.findAll({ where: whereObj });
     } else {
-      rows = await getRows('emails');
+      rows = await Email.findAll();
     }
     res.json(rows);
   })

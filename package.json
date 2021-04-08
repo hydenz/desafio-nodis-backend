@@ -6,22 +6,25 @@
   "jest": {
     "modulePathIgnorePatterns": [
       "<rootDir>/__tests__/utils/"
+    ],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/models"
     ]
   },
   "scripts": {
     "dev": "nodemon server.js",
-    "initdb": "cd db && knex migrate:latest && knex seed:run",
-    "prestart": "npm run initdb",
+    "reinitdb": "npx sequelize-cli db:migrate:undo:all && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "prestart": "npm run reinitdb",
     "start": "node server.js",
-    "pretest": "npm run initdb",
-    "test": "set NODE_ENV=testing && jest || true",
-    "posttest": "cd db && knex migrate:rollback",
-    "coverage": "npm run test -- --coverage"
+    "pretest": "cross-env NODE_ENV=test npm run reinitdb",
+    "test": "jest",
+    "coverage": "npm test -- --coverage"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "faker": "^5.5.1",
     "jest": "^26.6.3",
     "nodemon": "^2.0.7",
@@ -36,6 +39,8 @@
     "moment": "^2.29.1",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.6.2",
     "swagger-ui-express": "^4.1.6"
   }
 }

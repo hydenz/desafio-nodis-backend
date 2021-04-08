@@ -4,7 +4,7 @@ const {
   idParamValidator,
   validate,
 } = require('../../middlewares/emailValidator');
-const { knex } = require('../../utils/db');
+const { Email } = require('../../models/index');
 
 router.delete(
   '/emails/:id',
@@ -12,7 +12,7 @@ router.delete(
   validate,
   ash(async (req, res) => {
     const { id } = req.params;
-    await knex('emails').delete().where({ id });
+    await Email.destroy({ where: { id } });
     res.status(200).json({ message: 'Email deletado com sucesso' });
   })
 );

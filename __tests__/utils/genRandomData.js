@@ -1,4 +1,5 @@
 const faker = require('faker');
+faker.seed(Math.round(Math.random() * 1000));
 
 const genRandomEmail = () => ({
   from: faker.internet.email(),

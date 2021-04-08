@@ -6,7 +6,8 @@ const {
 } = require('../../middlewares/productsValidator');
 const { matchedData } = require('express-validator');
 const ash = require('express-async-handler');
-const { getRows, querySearchProducts } = require('../../utils/db');
+const { Product } = require('../../models/index');
+const { Op } = require('sequelize');
 
 router.get(
   '/products/:id?',
@@ -20,13 +21,20 @@ router.get(
     const { id } = req.params;
     let rows;
     if (id) {
-      res.json(req.product);
+      rows = req.product;
     }
     // Se houver alguma query
     else if (Object.keys(query).length) {
-      rows = await querySearchProducts(query);
+      // O nome será filtrado pelo operador SQL like %name%
+      // As outras queries serão filtradas pelo valor exato
+      rows = await Product.findAll({
+        where: {
+          ...query,
+          ...(query.name && { name: { [Op.substring]: query.name } }),
+        },
+      });
     } else {
-      rows = await getRows('products');
+      rows = await Product.findAll();
     }
     res.json(rows);
   })

@@ -1,5 +1,5 @@
 const { body, param, query, validationResult } = require('express-validator');
-const { getRows } = require('../utils/db');
+const { Email } = require('../models/index');
 
 const dbParams = {
   FROM_MAX_LENGTH: 64,
@@ -23,12 +23,12 @@ const idParamValidator = (method) => {
     .isInt({ min: 1 })
     .bail()
     .custom(async (id, { req }) => {
-      const rows = await getRows('emails', { id });
-      if (!rows.length) {
+      const email = await Email.findOne({ where: { id } });
+      if (!email) {
         req.status = 404;
         return Promise.reject(`Email de ID ${id} não encontrado`);
       }
-      req.email = rows[0];
+      req.email = email;
     });
 
   return [validator];

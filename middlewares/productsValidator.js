@@ -1,5 +1,5 @@
 const { body, param, query, validationResult } = require('express-validator');
-const { getRows, checkAnyRowExists } = require('../utils/db');
+const { Product } = require('../models/index');
 
 const dbParams = {
   NAME_MAX_LENGTH: 128,
@@ -13,14 +13,18 @@ const dbParams = {
 
 const queryValidator = () => [
   query('name', 'Deve ser não vazio (case insensitive)').optional().notEmpty(),
-  query('gtin13', 'Deve ser numérico e de comprimento 13')
+  query('gtin13', 'Deve ser númerico positivo e de comprimento 13')
     .optional()
-    .isNumeric()
+    .isNumeric({ no_symbols: true })
     .bail()
     .isLength({ min: dbParams.GTIN13_LENGTH, max: dbParams.GTIN13_LENGTH })
     .bail(),
-  query('price', 'Deve ser numérico').optional().isNumeric(),
-  query('quantity', 'Deve ser numérico').optional().isNumeric(),
+  query('price', 'Deve ser um número inteiro positivo')
+    .optional()
+    .isInt({ min: 1 }),
+  query('quantity', 'Deve ser um número inteiro positivo')
+    .optional()
+    .isInt({ min: 1 }),
   query('status', 'Deve ser AVAILABLE ou UNAVAILABLE')
     .optional()
     .custom((status) => dbParams.STATUS_REGEXP.test(status)),
@@ -36,21 +40,20 @@ const idParamValidator = (method) => {
     .isInt({ min: 1 })
     .bail()
     .custom(async (id, { req }) => {
-      const rows = await getRows('products', { id });
-      if (!rows.length) {
+      const product = await Product.findOne({ where: { id } });
+      if (!product) {
         req.status = 404;
         return Promise.reject(`Produto de ID ${id} não encontrado`);
       }
-      const product = rows[0];
       req.product = product;
     })
-    .bail()
-    .if(() => method === 'PATCH' || method === 'DELETE')
-    .custom(
-      async (id, { req }) =>
-        req.product.deletedAt &&
-        Promise.reject(`O produto de ID ${req.product.id} já foi deletado`)
-    );
+    .bail();
+  // .if(() => method === 'PATCH' || method === 'DELETE')
+  // .custom(
+  //   async (id, { req }) =>
+  //     req.product.deletedAt &&
+  //     Promise.reject(`O produto de ID ${req.product.id} já foi deletado`)
+  // );
 
   return [validator];
 };
@@ -71,7 +74,7 @@ const bodyValidator = (method) => {
       .bail()
       .custom(
         async (name) =>
-          (await checkAnyRowExists('products', { name })) &&
+          (await Product.findOne({ where: { name } })) &&
           Promise.reject('Este nome de produto já está sendo usado')
       ),
     body(
@@ -86,7 +89,7 @@ const bodyValidator = (method) => {
       .bail()
       .custom(
         async (gtin13) =>
-          (await checkAnyRowExists('products', { gtin13 })) &&
+          (await Product.findOne({ where: { gtin13 } })) &&
           Promise.reject('Este gtin13 já está sendo usado')
       ),
     body(
@@ -125,9 +128,11 @@ const bodyValidator = (method) => {
         return req.method !== 'PATCH' && Promise.reject();
       })
       .custom(async (price, { req }) => {
-        const products = await getRows('products', { id: req.params.id });
+        const product = await Product.findOne({
+          where: { id: req.params.id },
+        });
         return (
-          price <= products[0].price * 0.5 &&
+          price <= product.price * 0.5 &&
           Promise.reject(
             'Não é permitido uma redução de 50% ou mais no preço de um produto'
           )

@@ -1,15 +1,8 @@
 const app = require('../../api');
 const request = require('supertest');
-const { knex } = require('../../utils/db');
+const { sequelize } = require('../../models/index');
 
-beforeAll(async () => {
-  await knex.raw('START TRANSACTION');
-});
-
-afterAll(async () => {
-  await knex.raw('ROLLBACK');
-  knex.destroy();
-});
+afterAll(async () => await sequelize.close());
 
 describe('Testar GET /emails', () => {
   it('/emails deve retornar status 200', async () => {
