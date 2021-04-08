@@ -1,5 +1,5 @@
-<h1 style="text-align:center">desafio-nodis-backend</h1>
-<img style="display:block;margin-left:auto;margin-right:auto" src="./md/logo.png" width="50%"></img>
+<h1 align="center">desafio-nodis-backend</h1>
+<div align="center"><img src="./md/logo.png" width="50%"></img></div>
 
 <br></br>
 
