@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { matchedData } = require('express-validator');
 const ash = require('express-async-handler');
 const { bodyValidator, validate } = require('../../middlewares/emailValidator');
-const { insertRow, getRows } = require('../../utils/db');
+const { Email } = require('../../models/index');
 
 router.post(
   '/emails',
@@ -12,11 +12,11 @@ router.post(
     const newEmail = matchedData(req, {
       locations: ['body'],
     });
-    const id = await insertRow('emails', newEmail);
-    const rows = await getRows('emails', { id });
+
+    const email = await Email.create(newEmail);
     res.status(201).json({
       message: 'Email adicionado com sucesso',
-      email: rows[0],
+      email,
     });
   })
 );

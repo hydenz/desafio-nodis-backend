@@ -1,6 +1,7 @@
-# desafio-nodis-backend
+<h1 style="text-align:center">desafio-nodis-backend</h1>
+<img style="display:block;margin-left:auto;margin-right:auto" src="./md/logo.png" width="50%"></img>
 
-<h1 align="center"> 🚧  Em construção...  🚧</h1>
+<br></br>
 
 # Descrição
 
@@ -17,15 +18,18 @@ a especificação OpenAPI 3.0.0 está disponível na rota [/docs](http://ec2-15-
 
 # 🐋 Iniciando o servidor
 
-Você pode inicializar o servidor utilizando [Docker](https://www.docker.com/)
+Você pode inicializar o servidor ou fazer testes com [Jest](https://jestjs.io/) utilizando [Docker](https://www.docker.com/)
 
 ```bash
 # clonando o repositório
 git clone https://github.com/hydenz/desafio-nodis-backend.git
 # mudando de diretório
 cd desafio-nodis-backend
-# inicializando o container Docker
-docker compose up
+# inicializando o container Docker no Powershell
+$env:SCRIPT='start'; docker-compose up
+# inicializando o container Docker no Bash
+SCRIPT='start' docker-compose up
+# Para testar com o Jest, basta substituir 'start' por 'test'
 ```
 
 A API estará disponível para consumo em http://localhost:3001

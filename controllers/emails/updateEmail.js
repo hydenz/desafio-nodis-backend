@@ -6,7 +6,7 @@ const {
   bodyValidator,
   validate,
 } = require('../../middlewares/emailValidator');
-const { knex, getRows } = require('../../utils/db');
+const { Email } = require('../../models/index');
 
 router.patch(
   '/emails/:id',
@@ -21,9 +21,10 @@ router.patch(
       locations: ['body'],
     });
 
-    await knex('emails').update(newEmail).where({ id });
-    const rows = await getRows('emails', { id });
-    res.json({ message: 'Email atualizado com sucesso', email: rows[0] });
+    await Email.update(newEmail, { where: { id } });
+    const email = await Email.findOne({ where: { id } });
+
+    res.json({ message: 'Email atualizado com sucesso', email });
   })
 );
 

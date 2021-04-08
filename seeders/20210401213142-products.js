@@ -1,3 +1,5 @@
+'use strict';
+
 const getRandomGtin = () =>
   Math.floor(Math.random() * 10000000000000).toString();
 
@@ -56,8 +58,12 @@ const products = [
   },
 ];
 
-exports.seed = async function (knex) {
-  await knex('products').del();
-  await knex.raw('ALTER TABLE ' + 'products' + ' AUTO_INCREMENT = 1');
-  return knex('products').insert(products);
+module.exports = {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkInsert('products', products);
+  },
+
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkDelete('products');
+  },
 };

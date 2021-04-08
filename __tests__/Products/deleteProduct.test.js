@@ -1,19 +1,12 @@
 const app = require('../../api');
 const request = require('supertest');
-const { knex } = require('../../utils/db');
+const { sequelize } = require('../../models/index');
 
-beforeAll(async () => {
-  await knex.raw('START TRANSACTION');
-});
-
-afterAll(async () => {
-  await knex.raw('ROLLBACK');
-  knex.destroy();
-});
+afterAll(async () => await sequelize.close());
 
 describe('Testar DELETE /products', () => {
-  it('/products/1 deve retornar status 200', async () => {
-    const resp = await request(app).delete('/products/1');
+  it('/products/2 deve retornar status 200', async () => {
+    const resp = await request(app).delete('/products/2');
     expect(resp.status).toBe(200);
   });
 });

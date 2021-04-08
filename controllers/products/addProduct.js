@@ -3,26 +3,25 @@ const {
   bodyValidator,
   validate,
 } = require('../../middlewares/productsValidator');
-const { matchedData, body } = require('express-validator');
+const { matchedData } = require('express-validator');
 const ash = require('express-async-handler');
-const { insertRow, getRows } = require('../../utils/db');
+const { Product } = require('../../models/index');
 
 router.post(
   '/products',
   bodyValidator('POST'),
   validate,
-  body('images').customSanitizer((value) => JSON.stringify(value)),
+  // body('images').customSanitizer((value) => JSON.stringify(value)),
   ash(async (req, res) => {
-    const newProduct = matchedData(req, {
+    let newProduct = matchedData(req, {
       includeOptionals: true,
       locations: ['body'],
     });
-
-    const id = await insertRow('products', newProduct);
-    const rows = await getRows('products', { id });
+    newProduct = await Product.create(newProduct);
+    await newProduct.reload();
     res.status(201).json({
       message: 'Produto adicionado com sucesso',
-      product: rows[0],
+      product: newProduct,
     });
   })
 );

@@ -5,7 +5,8 @@ const {
   validate,
 } = require('../../middlewares/productsValidator');
 const { matchedData, body } = require('express-validator');
-const { knex, getRows } = require('../../utils/db');
+const Sequelize = require('sequelize');
+const { Product } = require('../../models/index');
 const ash = require('express-async-handler');
 
 router.patch(
@@ -14,20 +15,19 @@ router.patch(
   validate,
   bodyValidator('PATCH'),
   validate,
-  body('images').customSanitizer((value) => JSON.stringify(value)),
+  // body('images').customSanitizer((value) => JSON.stringify(value)),
   ash(async (req, res) => {
     const { id } = req.params;
-    const newProduct = matchedData(req, {
+    let newProduct = matchedData(req, {
       includeOptionals: true,
       locations: ['body'],
     });
-
-    newProduct.updatedAt = knex.fn.now();
-    await knex('products').update(newProduct).where({ id });
-    const rows = await getRows('products', { id });
+    newProduct.updatedAt = Sequelize.fn('now');
+    await Product.update(newProduct, { where: { id } });
+    newProduct = await Product.findOne({ where: { id } });
     res.json({
       message: 'Produto atualizado com sucesso',
-      product: rows[0],
+      product: newProduct,
     });
   })
 );
